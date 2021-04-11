@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package helloworld;
+
+service Greeter {
+    // 基础Demo
+    rpc SayHello (HelloRequest) returns (HelloResponse) {
+    }
+    // 进阶Demo
+    rpc GetDeptUser (GetDeptUserRequest) returns (GetDeptUserResponse) {
+    }
+}
+
+// 简单请求
+message HelloRequest {
+    string name = 1;
+}
+
+// 简单响应
+message HelloResponse {
+    string message = 1;
+}
+
+// 复杂请求
+message GetDeptUserRequest {
+    uint32 dept_id = 1; // 部门
+    string dept_name = 2; // 部门名称
+    repeated uint32 uid_list = 3; // 用户id列表
+    map<string, string> filter = 4; // 筛选条件
+}
+
+// 复杂响应
+message GetDeptUserResponse {
+    repeated BasicUser user_list = 1; // 用户列表
+    map<uint32, BasicUser> user_map = 2; // 用户哈希表
+}
+// 用户基本信息
+message BasicUser {
+    uint32 id = 1;
+    string name = 2;
+}
